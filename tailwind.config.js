@@ -186,6 +186,9 @@ module.exports = {
       width: {
         15.1: "15.1rem",
       },
+      spacing: {
+        128: '32rem',
+      },
     },
   },
   variants: {

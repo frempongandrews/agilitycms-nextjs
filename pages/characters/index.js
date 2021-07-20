@@ -1,11 +1,11 @@
-import CharactersList from "../../components/common/CharactersList";
+import Layout from "../../components/common/Layout";
+import CharactersList from "../../components/common/custom/CharactersList";
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 
 const CharactersPage = (props) => {
     // console.log("***********CharactersPage ==> props ==> ", props );
     return (
         <div>
-            <h1>All Characters Page</h1>
             <CharactersList />
         </div>
     )

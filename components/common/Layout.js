@@ -8,7 +8,7 @@ import SEO from "./SEO";
 import SiteHeader from "./SiteHeader";
 import SiteFooter from "./SiteFooter";
 import LoadingWidget from "./LoadingWidget";
-import Home from "./Home";
+import Hero from "./custom/Hero";
 
 // set up handle preview
 const isPreview = handlePreview();
@@ -22,8 +22,6 @@ function Layout(props) {
     pageTemplateName,
   } = props;
 
-  console.log("*********** pageTemplateName ===> ", pageTemplateName);
-  console.log("*********** page ===> ", page);
   // If the page is not yet generated, this will be displayed
   // initially until getStaticProps() finishes running
   const router = useRouter();
@@ -54,19 +52,14 @@ function Layout(props) {
         {isPreview && <LoadingWidget message="Loading Preview Mode" />}
         {!isPreview && (
           <div id="site">
-            {/*<PreviewBar {...props} />*/}
+            <PreviewBar {...props} />
             <div className="flex flex-col min-h-screen">
               {/*<SiteHeader {...props} />*/}
-              <div>
-                <Link href={`/characters`}>
-                  <a>Go to characters</a>
-                </Link>
-              </div>
-              <Home />
+              <Hero />
               <main className="flex-grow">
                 <AgilityPageTemplate {...props} />
               </main>
-              {/*<SiteFooter {...props} />*/}
+              <SiteFooter {...props} />
             </div>
           </div>
         )}

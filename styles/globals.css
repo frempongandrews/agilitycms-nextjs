@@ -20,3 +20,22 @@
 .prose blockquote {
   color: #243e63;
 }
+
+.user-profile-image{
+  position: relative;
+  bottom: -20px;
+  z-index: 99;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border: 1px solid red;
+  border-radius: 50%;
+}
+
+.drop{
+  background-color: yellow;
+  border: 2px solid;
+  border-radius: 50%;
+  /*height: 600px;*/
+  position: relative;
+}
