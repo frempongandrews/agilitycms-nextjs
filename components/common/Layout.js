@@ -1,12 +1,14 @@
 import { getPageTemplate } from "components/agility-pageTemplates";
 import { handlePreview } from "@agility/nextjs";
 import { useRouter } from "next/router";
+import Link from "next/link";
 import Error from "next/error";
 import PreviewBar from "./PreviewBar";
 import SEO from "./SEO";
 import SiteHeader from "./SiteHeader";
 import SiteFooter from "./SiteFooter";
 import LoadingWidget from "./LoadingWidget";
+import Home from "./Home";
 
 // set up handle preview
 const isPreview = handlePreview();
@@ -55,6 +57,12 @@ function Layout(props) {
             {/*<PreviewBar {...props} />*/}
             <div className="flex flex-col min-h-screen">
               {/*<SiteHeader {...props} />*/}
+              <div>
+                <Link href={`/characters`}>
+                  <a>Go to characters</a>
+                </Link>
+              </div>
+              <Home />
               <main className="flex-grow">
                 <AgilityPageTemplate {...props} />
               </main>
