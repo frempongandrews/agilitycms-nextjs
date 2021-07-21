@@ -1,10 +1,17 @@
+import { useEffect } from "react";
+import PropTypes from "prop-types";
 import Link from "next/link";
 import CustomLayout from "./CustomLayout";
 
-const CharactersList = () => {
+const CharactersList = ({characters}) => {
+
+    useEffect(() => {
+        console.log("********CharactersList updated - characters ==> ", characters);
+    })
+
     return (
         <CustomLayout title={`characters`}>
-            <section className="container p-6 mx-auto bg-white dark:bg-gray-800">
+            <section className="container p-6 mx-auto bg-white dark:bg-gray-800 mb-20">
                 <h2 className="text-xl font-medium text-gray-800 capitalize dark:text-white md:text-2xl">Characters</h2>
                 <div className="flex items-center justify-center">
                     <div className="grid gap-8 mt-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
@@ -116,4 +123,9 @@ const CharactersList = () => {
     )
 }
 
+CharactersList.propTypes = {
+    characters: PropTypes.array.isRequired
+}
+
 export default CharactersList;
+

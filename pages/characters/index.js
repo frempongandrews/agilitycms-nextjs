@@ -1,12 +1,21 @@
-import Layout from "../../components/common/Layout";
+import Link from "next/link";
 import CharactersList from "../../components/common/custom/CharactersList";
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 
-const CharactersPage = (props) => {
-    // console.log("***********CharactersPage ==> props ==> ", props );
+const CharactersPage = ({data}) => {
+    console.log("***********CharactersPage ==> data ==> ", data );
+    const { results } = data;
+    const nextPageQueryStr = data.next.split("/")[data.next.split("/").length-1]; // ?page=2
+    console.log("*********nextPageQueryStr ==> ", nextPageQueryStr);
     return (
         <div>
-            <CharactersList />
+            <CharactersList characters={results}/>
+
+            <div className="flex items-center justify-center">
+                <Link href={`/characters${nextPageQueryStr}`}>
+                    Load more
+                </Link>
+            </div>
         </div>
     )
 }
@@ -14,9 +23,10 @@ const CharactersPage = (props) => {
 export default CharactersPage;
 export const getServerSideProps = withPageAuthRequired({
     async getServerSideProps(ctx) {
-        console.log("*********getServerSideProps in Protected page ran");
+        console.log("*************ctx.query ===> ", ctx.query)
         const baseUrl = process.env.NEXT_PUBLIC_STAR_WARS_API_BASE_URL;
-        const res = await fetch(`${baseUrl}/people`);
+        const fetchUrl = !ctx.query.page ? `${baseUrl}/people`: `${baseUrl}/people?page=${ctx.query.page}`
+        const res = await fetch(`${fetchUrl}`);
         const data = await res.json();
 
         return {
@@ -26,3 +36,4 @@ export const getServerSideProps = withPageAuthRequired({
         }
     }
 });
+

@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { useUser } from '@auth0/nextjs-auth0';
+import {useState} from "react";
 
 const Hero = () => {
+    const [isMenuOpened, setIsMenuOpened] = useState(false);
     const { user } = useUser();
     return (
         <div>
@@ -43,29 +45,26 @@ const Hero = () => {
                                     user &&
                                     <div className="drop">
                                         {/*<span className="user-profile-image" />*/}
-                                        <button className="relative z-10 block p-2 bg-white rounded-md focus:outline-none rounded-full h-6 w-6 flex items-center justify-center">
-
-                                        </button>
+                                        <button className="relative z-10 block p-2 bg-white rounded-md focus:outline-none rounded-full h-6 w-6 flex items-center justify-center" onClick={() => setIsMenuOpened(!isMenuOpened)} style={styles.profileBackgroundImage}/>
                                         <div className="relative">
-                                            {/*<!-- Dropdown toggle button -->*/}
-
-
-
                                             {/*<!-- Dropdown menu -->*/}
-                                            <div className="absolute right-0 z-20 w-48 py-2 mt-2 bg-white rounded-md shadow-xl">
-                                                <Link href={`/profile`}>
-                                                    <a className="block px-4 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 transform hover:bg-blue-500 hover:text-white">
-                                                        your profile
-                                                    </a>
-                                                </Link>
+                                            {
+                                              isMenuOpened &&
+                                              <div className="absolute right-0 z-20 w-48 py-2 mt-2 bg-white rounded-md shadow-xl">
+                                                  <Link href={`/profile`}>
+                                                      <a className="block px-4 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 transform hover:bg-blue-500 hover:text-white">
+                                                          your profile
+                                                      </a>
+                                                  </Link>
 
-                                                <Link href={`/api/auth/logout`}>
-                                                    <a className="block px-4 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-blue-500 hover:text-white">
-                                                        Logout
-                                                    </a>
-                                                </Link>
+                                                  <Link href={`/api/auth/logout`}>
+                                                      <a className="block px-4 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-blue-500 hover:text-white">
+                                                          Logout
+                                                      </a>
+                                                  </Link>
 
-                                            </div>
+                                              </div>
+                                            }
                                         </div>
                                     </div>
                                 }
@@ -96,7 +95,17 @@ const Hero = () => {
 
 const styles = {
     bgImage: {
-        backgroundImage: "url(" + "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80" + ")"
+        backgroundImage: "url(" + "https://i.redd.it/d8ql17e0m7g51.jpg" + ")",
+        backgroundPosition: 'center',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat'
+
+    },
+    profileBackgroundImage: {
+        backgroundImage: "url(" + "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80" + ")",
+        backgroundPosition: 'center',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat'
     }
 }
 

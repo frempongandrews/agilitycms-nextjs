@@ -1,9 +1,12 @@
+import { useState } from "react";
 import Link from "next/link";
 import { useUser } from '@auth0/nextjs-auth0';
 
 
 const Header = () => {
+    const [isMenuOpened, setIsMenuOpened] = useState(false);
     const { user } = useUser();
+
     return (
         <nav className="bg-white shadow dark:bg-gray-800 mb-8">
             <div className="container px-6 py-4 mx-auto">
@@ -44,14 +47,31 @@ const Header = () => {
 
                             <button type="button" className="flex items-center focus:outline-none"
                                     aria-label="toggle profile dropdown">
-                                <div className="w-8 h-8 overflow-hidden border-2 border-gray-400 rounded-full">
+                                <div className="w-8 h-8 overflow-hidden border-2 border-gray-400 rounded-full" onClick={() => setIsMenuOpened(!isMenuOpened)}>
                                     <img
                                         src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
                                         className="object-cover w-full h-full" alt="avatar" />
                                 </div>
 
-                                <h3 className="mx-2 text-sm font-medium text-gray-700 dark:text-gray-200">Khatab
-                                    wedaa</h3>
+                                <h3 className="relative mx-2 text-sm font-medium text-gray-700 dark:text-gray-200">
+                                    {
+                                        isMenuOpened &&
+                                        <div className="absolute right-0 z-20 w-48 py-2 mt-6 bg-white rounded-md shadow-xl">
+                                            <Link href={`/profile`}>
+                                                <a className="block px-4 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 transform hover:bg-blue-500 hover:text-white">
+                                                    your profile
+                                                </a>
+                                            </Link>
+
+                                            <Link href={`/api/auth/logout`}>
+                                                <a className="block px-4 py-2 text-sm text-gray-700 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-blue-500 hover:text-white">
+                                                    Logout
+                                                </a>
+                                            </Link>
+
+                                        </div>
+                                    }
+                                </h3>
                             </button>
                         </div>
                     </div>
