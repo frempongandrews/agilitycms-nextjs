@@ -33,6 +33,8 @@ export const getServerSideProps = withPageAuthRequired({
     }
 });
 
+
+
 CharactersPage.propTypes = {
     data: PropTypes.object.isRequired,
     currentPage: PropTypes.number.isRequired,
