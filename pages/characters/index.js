@@ -1,4 +1,4 @@
-import Link from "next/link";
+import PropTypes from "prop-types";
 import CharactersList from "../../components/common/custom/CharactersList";
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import Pagination from "../../components/common/custom/Pagination";
@@ -7,16 +7,14 @@ const CharactersPage = ({data, currentPage}) => {
     console.log("***********CharactersPage ==> data ==> ", data );
     const { results } = data;
     const totalCharactersCount = data.count;
-    const resultsPerPage = results.length;
     return (
         <div>
             <CharactersList characters={results}/>
-            <Pagination resultsPerPage={resultsPerPage} totalCharactersCount={totalCharactersCount} currentPage={currentPage}/>
+            <Pagination totalCharactersCount={totalCharactersCount} currentPage={currentPage}/>
         </div>
     )
 }
 
-export default CharactersPage;
 export const getServerSideProps = withPageAuthRequired({
     async getServerSideProps(ctx) {
         console.log("*************ctx.query ===> ", ctx.query)
@@ -34,4 +32,12 @@ export const getServerSideProps = withPageAuthRequired({
         }
     }
 });
+
+CharactersPage.propTypes = {
+    data: PropTypes.object.isRequired,
+    currentPage: PropTypes.number.isRequired,
+}
+
+export default CharactersPage;
+
 
