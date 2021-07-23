@@ -1,6 +1,11 @@
+import PropTypes from "prop-types";
+import Character from "../../components/common/custom/Character";
+
 const CharacterPage = () => {
     return (
-        <h1>Single Character Page</h1>
+        <div>
+            <Character />
+        </div>
     )
 }
 

@@ -1,13 +1,13 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import Link from "next/link";
 import CustomLayout from "./CustomLayout";
 
 const CharactersList = ({characters}) => {
 
-    useEffect(() => {
-        console.log("********CharactersList updated - characters ==> ", characters);
-    })
+    const renderCharacters = () => {
+        // return characters
+    }
 
     return (
         <CustomLayout title={`characters`}>
@@ -114,7 +114,6 @@ const CharactersList = ({characters}) => {
                                     className="mt-1 font-medium text-gray-600 dark:text-gray-300">Software Engineer</span>
                             </div>
                         </div>
-
 
                     </div>
                 </div>
