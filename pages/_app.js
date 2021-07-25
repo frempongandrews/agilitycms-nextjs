@@ -1,11 +1,14 @@
 import { UserProvider } from '@auth0/nextjs-auth0';
 import '../styles/globals.css'
+import { SmoothScroll } from "../components/common/custom/SmoothScroll";
 
 function MyApp({ Component, pageProps }) {
   return (
-      <UserProvider>
-        <Component {...pageProps} />
-      </UserProvider>
+      <SmoothScroll>
+        <UserProvider>
+              <Component {...pageProps} />
+        </UserProvider>
+      </SmoothScroll>
   )
 }
 
