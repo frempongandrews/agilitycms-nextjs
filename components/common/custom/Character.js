@@ -8,7 +8,7 @@ import filImImages from "../../../helpers/filImImages";
 const Character = ({character, films}) => {
     const renderCharacterDetails = () => {
         return (
-            <div className="max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800" key={character.slug}>
+            <div className="max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg" key={character.slug}>
                 <Image className="object-cover object-center w-full h-56"
                      src={characterImages[character.slug] || characterImages["no-image"]}
                      alt="avatar" width={500} height={400}/>
@@ -25,7 +25,7 @@ const Character = ({character, films}) => {
 
                 <div className="px-6 py-4">
 
-                    <div className="flex items-center mt-4 text-gray-700 dark:text-gray-200">
+                    <div className="flex items-center mt-4 text-gray-700">
                         <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24" fill="none"
                              xmlns="http://www.w3.org/2000/svg">
                             <path fillRule="evenodd" clipRule="evenodd"
@@ -37,7 +37,7 @@ const Character = ({character, films}) => {
                         <h1 className="px-2 text-sm">Origin: {character.origin.name || "unknown"}</h1>
                     </div>
 
-                    <div className="flex items-center mt-4 text-gray-700 dark:text-gray-200">
+                    <div className="flex items-center mt-4 text-gray-700">
                         <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24" fill="none"
                              xmlns="http://www.w3.org/2000/svg">
                             <path fillRule="evenodd" clipRule="evenodd"
@@ -60,8 +60,8 @@ const Character = ({character, films}) => {
                          alt="avatar" width={400} height={600}/>
 
                     <div className="mt-2">
-                        <h3 className="text-lg font-medium text-gray-700 dark:text-gray-200">{film.title}</h3>
-                        <span className="mt-1 font-medium text-gray-600 dark:text-gray-300">Director: {film.director}</span>
+                        <h3 className="text-lg font-medium text-gray-700">{film.title}</h3>
+                        <span className="mt-1 font-medium text-gray-600">Director: {film.director}</span>
                     </div>
                 </div>
             )
@@ -72,8 +72,8 @@ const Character = ({character, films}) => {
         <CustomLayout>
             {renderCharacterDetails()}
 
-            <section className="container p-6 mx-auto bg-white dark:bg-gray-800">
-                <h2 className="text-xl font-medium text-gray-800 capitalize dark:text-white md:text-2xl">Appeared in </h2>
+            <section className="container p-6 mx-auto bg-white">
+                <h2 className="text-xl font-medium text-gray-800 capitalize md:text-2xl">Appeared in </h2>
 
                 <div className="flex items-center justify-center">
                     <div className="grid gap-8 mt-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
