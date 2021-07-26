@@ -1,15 +1,17 @@
 import PropTypes from "prop-types";
+import { withPageAuthRequired } from '@auth0/nextjs-auth0';
+import Image from "next/image";
 import CustomLayout from "./CustomLayout";
-import CharacterPage from "../../../pages/characters/[slug]";
+import characterImages from "../../../helpers/characterImages";
+import filImImages from "../../../helpers/filImImages";
 
 const Character = ({character, films}) => {
-
     const renderCharacterDetails = () => {
         return (
-            <div className="max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800">
-                <img className="object-cover object-center w-full h-56"
-                     src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
-                     alt="avatar" />
+            <div className="max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800" key={character.slug}>
+                <Image className="object-cover object-center w-full h-56"
+                     src={characterImages[character.slug] || characterImages["no-image"]}
+                     alt="avatar" width={500} height={400}/>
 
                 <div className="flex items-center px-6 py-3 bg-gray-900">
                     <svg className="w-6 h-6 text-white fill-current" viewBox="0 0 24 24" fill="none"
@@ -32,7 +34,7 @@ const Character = ({character, films}) => {
                                   d="M5.79417 16.5183C2.19424 13.0909 2.05438 7.3941 5.48178 3.79418C8.90918 0.194258 14.6059 0.0543983 18.2059 3.48179C21.8058 6.90919 21.9457 12.606 18.5183 16.2059L12.3124 22.7241L5.79417 16.5183ZM17.0698 14.8268L12.243 19.8965L7.17324 15.0698C4.3733 12.404 4.26452 7.9732 6.93028 5.17326C9.59603 2.37332 14.0268 2.26454 16.8268 4.93029C19.6267 7.59604 19.7355 12.0269 17.0698 14.8268Z"/>
                         </svg>
 
-                        <h1 className="px-2 text-sm">Origin: California</h1>
+                        <h1 className="px-2 text-sm">Origin: {character.origin.name || "unknown"}</h1>
                     </div>
 
                     <div className="flex items-center mt-4 text-gray-700 dark:text-gray-200">
@@ -49,11 +51,20 @@ const Character = ({character, films}) => {
         )
     }
 
-    const renderCharacterFilms = async () => {
+    const renderCharacterFilms = () => {
         return films.map((film) => {
-            // return (
-            //
-            // )
+            return (
+                <div className="w-full max-w-xs text-center" key={film.episode_id}>
+                    <Image className="object-cover object-center w-full h-48 mx-auto rounded-lg"
+                         src={filImImages[film.slug]}
+                         alt="avatar" width={400} height={600}/>
+
+                    <div className="mt-2">
+                        <h3 className="text-lg font-medium text-gray-700 dark:text-gray-200">{film.title}</h3>
+                        <span className="mt-1 font-medium text-gray-600 dark:text-gray-300">Director: {film.director}</span>
+                    </div>
+                </div>
+            )
         })
     }
 
@@ -66,53 +77,7 @@ const Character = ({character, films}) => {
 
                 <div className="flex items-center justify-center">
                     <div className="grid gap-8 mt-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-
-
-                        <div className="w-full max-w-xs text-center">
-                            <img className="object-cover object-center w-full h-48 mx-auto rounded-lg"
-                                 src="https://images.unsplash.com/photo-1493863641943-9b68992a8d07?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=739&q=80"
-                                 alt="avatar"/>
-
-                            <div className="mt-2">
-                                <h3 className="text-lg font-medium text-gray-700 dark:text-gray-200">Ahmed Omer</h3>
-                                <span className="mt-1 font-medium text-gray-600 dark:text-gray-300">CEO</span>
-                            </div>
-                        </div>
-
-                        <div className="w-full max-w-xs text-center">
-                            <img className="object-cover object-center w-full h-48 mx-auto rounded-lg"
-                                 src="https://images.unsplash.com/photo-1516756587022-7891ad56a8cd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
-                                 alt="avatar"/>
-
-                            <div className="mt-2">
-                                <h3 className="text-lg font-medium text-gray-700 dark:text-gray-200">Jane Doe</h3>
-                                <span className="mt-1 font-medium text-gray-600 dark:text-gray-300">Co-founder</span>
-                            </div>
-                        </div>
-
-                        <div className="w-full max-w-xs text-center">
-                            <img className="object-cover object-center w-full h-48 mx-auto rounded-lg"
-                                 src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=731&q=80"
-                                 alt="avatar"/>
-
-                            <div className="mt-2">
-                                <h3 className="text-lg font-medium text-gray-700 dark:text-gray-200">Steve Ben</h3>
-                                <span className="mt-1 font-medium text-gray-600 dark:text-gray-300">UI/UX</span>
-                            </div>
-                        </div>
-
-                        <div className="w-full max-w-xs text-center">
-                            <img className="object-cover object-center w-full h-48 mx-auto rounded-lg"
-                                 src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
-                                 alt="avatar"/>
-
-                            <div className="mt-2">
-                                <h3 className="text-lg font-medium text-gray-700 dark:text-gray-200">Patterson
-                                    Johnson</h3>
-                                <span
-                                    className="mt-1 font-medium text-gray-600 dark:text-gray-300">Software Engineer</span>
-                            </div>
-                        </div>
+                        {renderCharacterFilms()}
                     </div>
                 </div>
 

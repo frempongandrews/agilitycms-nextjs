@@ -1,21 +1,31 @@
+import Image from "next/image";
+import { withPageAuthRequired } from "@auth0/nextjs-auth0";
 import CustomLayout from "../components/common/custom/CustomLayout";
+import characterImages from "../helpers/characterImages";
 
-const ProfilePage = () => {
+const ProfilePage = ({user}) => {
+    const renderProfile = () => {
+        return (
+            <div className="max-w-xs mx-auto overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800">
+                <Image className="object-cover w-full h-56"
+                       src={user.picture || characterImages["no-image"]}
+                       alt="avatar" width={400} height={300} />
+
+                <div className="py-5 text-center">
+                    <a href="#" className="block text-2xl font-bold text-gray-800 dark:text-white">{user.nickname || "No nickname"}</a>
+                    <span className="text-sm text-gray-700 dark:text-gray-200">Email: {user.email}</span>
+                </div>
+            </div>
+        )
+    }
     return (
         <CustomLayout>
 
-            <div className="max-w-xs mx-auto overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800">
-                <img className="object-cover w-full h-56"
-                     src="https://images.unsplash.com/photo-1542156822-6924d1a71ace?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
-                     alt="avatar" />
-
-                    <div className="py-5 text-center">
-                        <a href="#" className="block text-2xl font-bold text-gray-800 dark:text-white">John Doe</a>
-                        <span className="text-sm text-gray-700 dark:text-gray-200">Software Engineer</span>
-                    </div>
-            </div>
+            {renderProfile()}
         </CustomLayout>
     )
 }
+
+export const getServerSideProps = withPageAuthRequired();
 
 export default ProfilePage;

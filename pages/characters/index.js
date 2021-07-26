@@ -4,7 +4,6 @@ import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import Pagination from "../../components/common/custom/Pagination";
 
 const CharactersPage = ({data, currentPage}) => {
-    console.log("**********Data ==> ", data);
     const { results } = data;
     const totalCharactersCount = data.count;
     return (
